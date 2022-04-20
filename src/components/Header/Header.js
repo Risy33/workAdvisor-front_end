@@ -17,6 +17,7 @@ export default function Header() {
   const submit = (e) => {
     e.preventDefault();
     dispatch(filterExperiences(title));
+  
   };
 
   return (

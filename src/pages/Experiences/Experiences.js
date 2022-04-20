@@ -7,10 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllExperiences } from "../../store/experiences/actions";
-import {
- 
-  selectFilteredExperiences,
-} from "../../store/experiences/selector";
+import { selectFilteredExperiences } from "../../store/experiences/selector";
 import "./Experiences.css";
 import Header from "../../components/Header/Header";
 import { CardHeader, Avatar, IconButton } from "@mui/material";
