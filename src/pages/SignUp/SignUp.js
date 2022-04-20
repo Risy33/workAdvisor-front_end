@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/user/actions";
 
+
 const theme = createTheme();
 
 export default function SignUp() {
@@ -113,6 +114,7 @@ export default function SignUp() {
                 <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
+
               </Grid>
             </Grid>
           </Box>
