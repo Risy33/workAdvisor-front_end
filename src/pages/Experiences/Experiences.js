@@ -7,7 +7,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllExperiences } from "../../store/experiences/actions";
-import { selectAllExperiences } from "../../store/experiences/selector";
+import {
+ 
+  selectFilteredExperiences,
+} from "../../store/experiences/selector";
 import "./Experiences.css";
 import Header from "../../components/Header/Header";
 import { CardHeader, Avatar, IconButton } from "@mui/material";
@@ -18,7 +21,7 @@ import { selectLoading } from "../../store/experiences/selector";
 export default function Experiences() {
   const dispatch = useDispatch();
 
-  const experiences = useSelector(selectAllExperiences);
+  const experiences = useSelector(selectFilteredExperiences);
   const loading = useSelector(selectLoading);
 
   useEffect(() => {

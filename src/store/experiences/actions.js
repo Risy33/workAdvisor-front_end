@@ -4,6 +4,7 @@ import { apiUrl } from "../config/constant";
 export const SET_LOADING = "experiences/loading";
 export const SET_EXPERIENCES = "experiences/getExperiences";
 export const FILTER_EXPERIENCES = "experiences/filterExperiences";
+export const RESET_EXPERIENCES = "experiences/resetExperiences";
 
 const startLoading = () => ({
   type: SET_LOADING,
@@ -16,6 +17,11 @@ const getExperiences = (experiences) => ({
 
 export const filterExperiences = (experiences) => ({
   type: FILTER_EXPERIENCES,
+  payload: experiences,
+});
+
+export const resetExperiences = (experiences) => ({
+  type: RESET_EXPERIENCES,
   payload: experiences,
 });
 

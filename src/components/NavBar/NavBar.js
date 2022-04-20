@@ -22,19 +22,21 @@ export default function ProminentAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "white" }}>
         <StyledToolbar>
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            sx={{
-              flexGrow: 1,
-              alignSelf: "flex-end",
-              fontSize: 60,
-              color: "green",
-            }}
-          >
-            Work Advisor
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <Typography
+              variant="h5"
+              noWrap
+              component="div"
+              sx={{
+                // flexGrow: 1,
+                // alignSelf: "flex-end",
+                // fontSize: 60,
+                color: "green",
+              }}
+            >
+              Work Advisor
+            </Typography>
+          </Box>
           <IconButton
             size="large"
             aria-label="search"
