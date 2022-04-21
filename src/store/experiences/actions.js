@@ -15,19 +15,9 @@ const getExperiences = (experiences) => ({
   payload: { experiences },
 });
 
-export const filterExperiences = (experiences) => ({
-  type: FILTER_EXPERIENCES,
-  payload: experiences,
-});
-
-export const resetExperiences = () => ({
-  type: RESET_EXPERIENCES,
-  
-});
-
 export const fetchAllExperiences = async (dispatch, getState) => {
   dispatch(startLoading());
   const response = await axios.get(`${apiUrl}/experiences`);
-  console.log("response", response.data);
+  // console.log("response", response.data);
   dispatch(getExperiences(response.data.experiences));
 };

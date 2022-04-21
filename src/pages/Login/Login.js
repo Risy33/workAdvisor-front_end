@@ -2,9 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import TextField from "@mui/material/TextField"
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -26,10 +24,12 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(selectToken);
+  console.log("token", token);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(login(email, password));
+
     setEmail("");
     setPassword("");
     const data = new FormData(event.currentTarget);
@@ -38,6 +38,12 @@ export default function SignIn() {
       password: data.get("password"),
     });
   };
+
+  useEffect(() => {
+    if (token !== null) {
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,10 +92,6 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="" color="primary" />}
-              label="Are you a hospitality Hero?"
             />
             <Button
               type="submit"

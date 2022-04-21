@@ -3,30 +3,73 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWorkPlaces } from "../../store/workplaces/actions";
 import {
+  selectFilteredWorkPlaces,
   selectWorkPlaces,
   selectLoading,
 } from "../../store/workplaces/selectors";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Header from "../../components/Header/Header";
+import "./WorkPlaces.css";
+import { useParams } from "react-router-dom";
 
 export default function WorkPlaces() {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
+  const workPlacesFiltered = useSelector(selectFilteredWorkPlaces);
   const workPlaces = useSelector(selectWorkPlaces);
 
-  useEffect(() => {
-    dispatch(fetchWorkPlaces);
-  }, [dispatch]);
+  console.log("workplaces", workPlaces);
+
+  const { filter } = useParams();
+
+  useEffect(() => {}, [filter]);
+
+  const toMap = !filter ? workPlaces : workPlacesFiltered;
 
   return (
     <div>
-      {workPlaces
-        ? workPlaces.map((workPlace) => {
-            return (
-              <div>
-                <h1>{workPlace.name}</h1>
-              </div>
-            );
-          })
-        : loading}
+      <Header />
+      <div className="work_card">
+        {workPlacesFiltered
+          ? toMap.map((workPlace) => {
+              return (
+                <div key={workPlace.id}>
+                  <Card
+                    sx={{
+                      maxWidth: 600,
+                      margin: "20px",
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      image={workPlace.image}
+                      alt={workPlace.name}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {workPlace.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {workPlace.type}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {workPlace.address}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">Learn More</Button>
+                    </CardActions>
+                  </Card>
+                </div>
+              );
+            })
+          : loading}
+      </div>
     </div>
   );
 }

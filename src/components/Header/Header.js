@@ -7,17 +7,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./Header.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterExperiences } from "../../store/experiences/actions";
+import { filterWorkplaces } from "../../store/workplaces/actions";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  console.log("title", title);
+  // console.log("name", name);
   const submit = (e) => {
     e.preventDefault();
-    dispatch(filterExperiences(title));
-  
+    dispatch(filterWorkplaces(name));
+    navigate(`/workPlaces/${name}`);
   };
 
   return (
@@ -38,10 +40,10 @@ export default function Header() {
         </IconButton>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Search Experience"
+          placeholder="Search Work PLace"
           inputProps={{ "aria-label": "search google maps" }}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
           <SearchIcon />

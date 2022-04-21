@@ -1,14 +1,8 @@
-import {
-  SET_EXPERIENCES,
-  SET_LOADING,
-  FILTER_EXPERIENCES,
-  RESET_EXPERIENCES,
-} from "./actions";
+import { SET_EXPERIENCES, SET_LOADING } from "./actions";
 
 const initialState = {
   loading: null,
   allExperiences: [],
-  filteredExperiences: [],
 };
 
 export default function experiencesReducer(state = initialState, action) {
@@ -24,24 +18,6 @@ export default function experiencesReducer(state = initialState, action) {
         ...state,
         loading: false,
         allExperiences: [...action.payload.experiences],
-        filteredExperiences: [...action.payload.experiences],
-      };
-    }
-    case FILTER_EXPERIENCES: {
-      const filteredExperiences = state.allExperiences.filter((experience) => {
-        return experience.title
-          .toLowerCase()
-          .includes(action.payload.toLowerCase());
-      });
-      return {
-        ...state,
-        filteredExperiences: filteredExperiences,
-      };
-    }
-    case RESET_EXPERIENCES: {
-      return {
-        ...state,
-        filteredExperiences: [...state.allExperiences],
       };
     }
 

@@ -9,11 +9,15 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../store/user/actions";
-
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { selectToken } from "../../store/user/selector";
 
 const theme = createTheme();
 
@@ -21,20 +25,30 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const token = useSelector(selectToken);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(signUp(name, email, password));
+    dispatch(signUp(name, email, password, isAdmin));
     setEmail("");
     setPassword("");
     setName("");
+    setIsAdmin(false);
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
   };
+
+  useEffect(() => {
+    if (token !== null) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -101,6 +115,16 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  value={isAdmin}
+                  color="primary"
+                  onChange={() => setIsAdmin(!isAdmin)}
+                />
+              }
+              label="Are you a hospitality Hero?"
+            />
             <Button
               type="submit"
               fullWidth
@@ -114,7 +138,6 @@ export default function SignUp() {
                 <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
-
               </Grid>
             </Grid>
           </Box>

@@ -6,6 +6,9 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { selectToken } from "../../store/user/selector";
+import { logOut } from "../../store/user/actions";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
@@ -18,6 +21,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 }));
 
 export default function ProminentAppBar() {
+  const token = useSelector(selectToken);
+  const dispatch = useDispatch();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "white" }}>
@@ -33,14 +39,11 @@ export default function ProminentAppBar() {
               color: "green",
             }}
           >
-            Work Advisor
+            <Link style={{ color: "green" }} to="/">
+              Work Advisor
+            </Link>
           </Typography>
 
-          <IconButton
-            size="large"
-            aria-label="search"
-            color="inherit"
-          ></IconButton>
           <IconButton
             size="large"
             edge="end"
@@ -59,21 +62,52 @@ export default function ProminentAppBar() {
             color="inherit"
             sx={{ margin: "5px", fontSize: "20px", marginTop: "30px" }}
           >
-            <Link style={{ color: "green" }} to="/login">
-              LogIn
+            <Link style={{ color: "green" }} to="/workPlaces">
+              Work Places
             </Link>
           </IconButton>
-          <IconButton
-            size="large"
-            aria-label="display more actions"
-            edge="end"
-            color="inherit"
-            sx={{ margin: "5px", fontSize: "20px", marginTop: "30px" }}
-          >
-            <Link style={{ color: "green" }} to="/signup">
-              SignUp
-            </Link>
-          </IconButton>
+          {!token ? (
+            <div>
+              {" "}
+              <IconButton
+                size="large"
+                aria-label="display more actions"
+                edge="end"
+                color="inherit"
+                sx={{ margin: "5px", fontSize: "20px", marginTop: "30px" }}
+              >
+                <Link style={{ color: "green" }} to="/login">
+                  LogIn
+                </Link>
+              </IconButton>
+              <IconButton
+                size="large"
+                aria-label="display more actions"
+                edge="end"
+                color="inherit"
+                sx={{ margin: "5px", fontSize: "20px", marginTop: "30px" }}
+              >
+                <Link style={{ color: "green" }} to="/signup">
+                  SignUp
+                </Link>
+              </IconButton>
+            </div>
+          ) : (
+            <IconButton
+              size="large"
+              aria-label="display more actions"
+              edge="end"
+              onClick={() => dispatch(logOut())}
+              sx={{
+                margin: "5px",
+                fontSize: "20px",
+                marginTop: "30px",
+                color: "green",
+              }}
+            >
+              LogOut
+            </IconButton>
+          )}
         </StyledToolbar>
       </AppBar>
     </Box>

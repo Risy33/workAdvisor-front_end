@@ -23,7 +23,7 @@ const tokenStillValid = (userWithoutToken) => ({
 
 export const logOut = () => ({ type: LOG_OUT });
 
-export const signUp = (name, email, password) => {
+export const signUp = (name, email, password, isAdmin) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
@@ -31,6 +31,7 @@ export const signUp = (name, email, password) => {
         name,
         email,
         password,
+        isAdmin,
       });
 
       dispatch(loginSuccess(response.data));
@@ -59,8 +60,8 @@ export const login = (email, password) => {
       });
 
       dispatch(loginSuccess(response.data));
-    //   dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
-    //   dispatch(appDoneLoading());
+      //   dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
+      //   dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
@@ -69,7 +70,7 @@ export const login = (email, password) => {
         console.log(error.message);
         // dispatch(setMessage("danger", true, error.message));
       }
-    //   dispatch(appDoneLoading());
+      //   dispatch(appDoneLoading());
     }
   };
 };
@@ -92,7 +93,7 @@ export const getUserWithStoredToken = () => {
 
       // token is still valid
       dispatch(tokenStillValid(response.data));
-    //   dispatch(appDoneLoading());
+      //   dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.message);
@@ -102,7 +103,7 @@ export const getUserWithStoredToken = () => {
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
       dispatch(logOut());
-    //   dispatch(appDoneLoading());
+      //   dispatch(appDoneLoading());
     }
   };
 };
