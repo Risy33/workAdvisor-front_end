@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken } from "../../store/user/selector";
 import { logOut } from "../../store/user/actions";
@@ -23,6 +23,12 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 export default function ProminentAppBar() {
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logOutBotton = () => {
+    navigate("/");
+    dispatch(logOut());
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -97,7 +103,7 @@ export default function ProminentAppBar() {
               size="large"
               aria-label="display more actions"
               edge="end"
-              onClick={() => dispatch(logOut())}
+              onClick={logOutBotton}
               sx={{
                 margin: "5px",
                 fontSize: "20px",
