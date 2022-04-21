@@ -65,6 +65,27 @@ export default function WorkPlaces() {
                       <Button size="small">Learn More</Button>
                     </CardActions>
                   </Card>
+                  <div>
+                    {workPlace.experiences.map((e) => {
+                      return (
+                        <Card
+                          key={e.id}
+                          sx={{
+                            backgroundColor: "lightgray",
+                            marginTop: "10px",
+                          }}
+                        >
+                          {e.title}
+                          <CardMedia
+                            component="img"
+                            image={e.image}
+                            alt={e.title}
+                            sx={{ maxWidth: "200px" }}
+                          />
+                        </Card>
+                      );
+                    })}
+                  </div>
                 </div>
               );
             })

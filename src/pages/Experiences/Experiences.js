@@ -66,8 +66,11 @@ export default function Experiences() {
                       <Button size="small">useful:{e.useful}</Button>
                     </CardActions>
                     <Button variant="contained">
-                      <Link href="/workplaces" style={{ color: "white" }}>
-                        Go to the work-place
+                      <Link
+                        href={`/workplaces/`}
+                        style={{ color: "white" }}
+                      >
+                        Go to all stories
                       </Link>
                     </Button>
                   </Card>
