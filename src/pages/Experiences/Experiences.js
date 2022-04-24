@@ -7,20 +7,17 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllExperiences } from "../../store/experiences/actions";
-import { fetchWorkPlaces } from "../../store/workplaces/actions";
 import { selectAllExperiences } from "../../store/experiences/selector";
 import "./Experiences.css";
 import Header from "../../components/Header/Header";
 import { CardHeader, Avatar, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Link from "@mui/material/Link";
-import { selectLoading } from "../../store/experiences/selector";
 
 export default function Experiences() {
   const dispatch = useDispatch();
 
   const experiences = useSelector(selectAllExperiences);
-  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(fetchAllExperiences);
@@ -31,7 +28,7 @@ export default function Experiences() {
     <div>
       <Header />
       <div className="card-container">
-        {!loading
+        {experiences
           ? experiences.map((e) => {
               return (
                 <div key={e.id} className="card">
@@ -62,15 +59,14 @@ export default function Experiences() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small">rating: {e.rating}</Button>
                       <Button size="small">useful:{e.useful}</Button>
                     </CardActions>
                     <Button variant="contained">
                       <Link
-                        href={`/workplaces/`}
+                        href={`/workplaces/details/${e.workPlace.id}`}
                         style={{ color: "white" }}
                       >
-                        Go to all stories
+                        Go to stories
                       </Link>
                     </Button>
                   </Card>

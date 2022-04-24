@@ -1,9 +1,16 @@
-import { FILTER_WORKPLACES, SET_LOADING, SET_WORK_PLACES } from "./actions";
+import {
+  FILTER_WORKPLACES,
+  SET_LOADING,
+  SET_WORK_PLACES,
+  SET_WORK_PLACE_ID,
+  FILTER_EXPERIENCES_BY_RATE,
+} from "./actions";
 
 const initialState = {
   loading: null,
   workPlaces: [],
   filteredWorkPlaces: [],
+  workPlace: null,
 };
 
 export default function workPlacesReducer(state = initialState, action) {
@@ -32,6 +39,13 @@ export default function workPlacesReducer(state = initialState, action) {
         filteredWorkPlaces: filteredWorkPlaces,
       };
     }
+    case SET_WORK_PLACE_ID: {
+      return {
+        ...state,
+        workPlace: { ...action.payload.id },
+      };
+    }
+
     default: {
       return state;
     }

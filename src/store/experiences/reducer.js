@@ -1,8 +1,9 @@
-import { SET_EXPERIENCES, SET_LOADING } from "./actions";
+import { SET_EXPERIENCES, SET_LOADING, SET_USEFUL } from "./actions";
 
 const initialState = {
   loading: null,
   allExperiences: [],
+  experience: [],
 };
 
 export default function experiencesReducer(state = initialState, action) {
@@ -16,8 +17,15 @@ export default function experiencesReducer(state = initialState, action) {
     case SET_EXPERIENCES: {
       return {
         ...state,
-        loading: false,
         allExperiences: [...action.payload.experiences],
+        experience: [...action.payload.experiences],
+      };
+    }
+    case SET_USEFUL: {
+      return {
+        ...state,
+        loading: false,
+        experience: { ...state.experience, useful: action.payload },
       };
     }
 

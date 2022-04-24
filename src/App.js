@@ -9,6 +9,7 @@ import WorkPlaces from "./pages/Workplaces/WorkPlaces";
 import { fetchWorkPlaces } from "./store/workplaces/actions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import Details from "./pages/Workplaces/Details";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,8 +26,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/workPlaces" element={<WorkPlaces />}>
-          <Route path=":filter" element={<WorkPlaces />} />
+          <Route path=":filter" element={<Details />} />
         </Route>
+        <Route path="/workPlaces/details/:id" element={<Details />} />
       </Routes>
       <Footer />
     </div>

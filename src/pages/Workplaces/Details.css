@@ -1,0 +1,5 @@
+.details_workPlaces {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

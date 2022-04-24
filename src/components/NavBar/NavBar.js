@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken } from "../../store/user/selector";
 import { logOut } from "../../store/user/actions";
+import BadgeIcon from "@mui/icons-material/Badge";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
@@ -49,7 +50,7 @@ export default function ProminentAppBar() {
               Work Advisor
             </Link>
           </Typography>
-
+          <BadgeIcon />
           <IconButton
             size="large"
             edge="end"

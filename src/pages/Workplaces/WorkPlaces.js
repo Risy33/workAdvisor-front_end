@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Header from "../../components/Header/Header";
 import "./WorkPlaces.css";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 export default function WorkPlaces() {
   const dispatch = useDispatch();
@@ -53,6 +53,7 @@ export default function WorkPlaces() {
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {workPlace.name}
+                        <Button size="small">rating: {workPlace.rating}</Button>
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {workPlace.type}
@@ -61,31 +62,16 @@ export default function WorkPlaces() {
                         {workPlace.address}
                       </Typography>
                     </CardContent>
-                    <CardActions>
-                      <Button size="small">Learn More</Button>
-                    </CardActions>
+
+                    <Button variant="contained">
+                      <Link
+                        to={`/workplaces/details/${workPlace.id}`}
+                        style={{ color: "white" }}
+                      >
+                        Read stories
+                      </Link>
+                    </Button>
                   </Card>
-                  <div>
-                    {workPlace.experiences.map((e) => {
-                      return (
-                        <Card
-                          key={e.id}
-                          sx={{
-                            backgroundColor: "lightgray",
-                            marginTop: "10px",
-                          }}
-                        >
-                          {e.title}
-                          <CardMedia
-                            component="img"
-                            image={e.image}
-                            alt={e.title}
-                            sx={{ maxWidth: "200px" }}
-                          />
-                        </Card>
-                      );
-                    })}
-                  </div>
                 </div>
               );
             })
