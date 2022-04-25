@@ -3,14 +3,16 @@ import {
   SET_LOADING,
   SET_WORK_PLACES,
   SET_WORK_PLACE_ID,
-  FILTER_EXPERIENCES_BY_RATE,
+  SET_EXPERIENCES,
 } from "./actions";
-
+import { SET_USEFUL } from "../experiences/actions";
 const initialState = {
   loading: null,
   workPlaces: [],
   filteredWorkPlaces: [],
   workPlace: null,
+  allExperiences: [],
+  experience: null,
 };
 
 export default function workPlacesReducer(state = initialState, action) {
@@ -43,6 +45,33 @@ export default function workPlacesReducer(state = initialState, action) {
       return {
         ...state,
         workPlace: { ...action.payload.id },
+      };
+    }
+    case SET_EXPERIENCES: {
+      return {
+        ...state,
+        allExperiences: [...action.payload.experiences],
+      };
+    }
+    case SET_USEFUL: {
+
+      const updateExperiences = state.workPlace.experiences.map((exp) => {
+        if (exp.id === parseInt(action.payload)) {
+          return {
+            ...exp,
+            useful: exp.useful + 1,
+          };
+        } else {
+          return exp;
+        }
+      });
+
+      return {
+        ...state,
+        workPlace: {
+          ...state.workPlace,
+          experiences: [...updateExperiences],
+        },
       };
     }
 

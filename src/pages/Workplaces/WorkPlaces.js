@@ -1,14 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchWorkPlaces } from "../../store/workplaces/actions";
 import {
   selectFilteredWorkPlaces,
   selectWorkPlaces,
   selectLoading,
 } from "../../store/workplaces/selectors";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
@@ -16,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import Header from "../../components/Header/Header";
 import "./WorkPlaces.css";
 import { useParams, Link } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
 
 export default function WorkPlaces() {
   const dispatch = useDispatch();
@@ -53,7 +53,18 @@ export default function WorkPlaces() {
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="div">
                         {workPlace.name}
-                        <Button size="small">rating: {workPlace.rating}</Button>
+                        <Box
+                          sx={{
+                            "& > legend": { mt: 2 },
+                          }}
+                        >
+                          <Typography component="legend"></Typography>
+                          <Rating
+                            name="read-only"
+                            value={parseInt(workPlace.rating)}
+                            readOnly
+                          />
+                        </Box>
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                         {workPlace.type}

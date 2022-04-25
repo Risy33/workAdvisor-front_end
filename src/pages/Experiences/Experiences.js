@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
@@ -13,12 +12,19 @@ import Header from "../../components/Header/Header";
 import { CardHeader, Avatar, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Link from "@mui/material/Link";
+import { updateUseful } from "../../store/experiences/actions";
+import { selectToken, selectUser } from "../../store/user/selector";
+import moment from "moment";
 
 export default function Experiences() {
   const dispatch = useDispatch();
 
   const experiences = useSelector(selectAllExperiences);
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
+  console.log("user", user);
 
+  console.log("token", token);
   useEffect(() => {
     dispatch(fetchAllExperiences);
   }, [dispatch]);
@@ -38,7 +44,9 @@ export default function Experiences() {
                         <Avatar
                           sx={{ bgcolor: "red[500]" }}
                           aria-label="recipe"
-                        ></Avatar>
+                        >
+                          {user.name}
+                        </Avatar>
                       }
                       action={
                         <IconButton aria-label="settings">
@@ -46,7 +54,9 @@ export default function Experiences() {
                         </IconButton>
                       }
                       title={e.title}
-                      subheader={`made the:${e.createdAt}`}
+                      subheader={moment(e.createdAt).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )}
                     />
                     <CardMedia
                       component="img"
@@ -58,9 +68,7 @@ export default function Experiences() {
                         {e.description}
                       </Typography>
                     </CardContent>
-                    <CardActions>
-                      <Button size="small">useful:{e.useful}</Button>
-                    </CardActions>
+
                     <Button variant="contained">
                       <Link
                         href={`/workplaces/details/${e.workPlace.id}`}
@@ -68,6 +76,12 @@ export default function Experiences() {
                       >
                         Go to stories
                       </Link>
+                    </Button>
+                    <Button
+                      onClick={() => dispatch(updateUseful(e.id, e.useful))}
+                      size="small"
+                    >
+                      Was it useful? {e.useful} 👍
                     </Button>
                   </Card>
                 </div>
