@@ -12,7 +12,7 @@ import { CardActions } from "@mui/material";
 import { Button } from "@mui/material";
 import { updateUseful } from "../../store/experiences/actions";
 import "./Details.css";
-import { selectToken, selectUser } from "../../store/user/selector";
+import { selectToken } from "../../store/user/selector";
 import Form from "../../components/Form.js/Form";
 import moment from "moment";
 import InputLabel from "@mui/material/InputLabel";
@@ -22,6 +22,7 @@ import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Header from "../../components/Header/Header";
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 
 export default function Details() {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ export default function Details() {
         setSorted([...workPlace.experiences]);
     }
   };
+  const position = [52.37306882922609, 4.892661365801631];
 
   return (
     <div>
@@ -90,35 +92,61 @@ export default function Details() {
         "loading"
       ) : (
         <div className="details_workPlaces">
+          
           <Card sx={{ width: "60rem" }}>
             <CardMedia
               component="img"
-              height="300px"
+              sx={{ width: "30rem", height: "20rem" }}
               image={workPlace.image}
               alt={workPlace.name}
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {workPlace.name}
+            
+            <div className="right-side">
+              <CardContent>
+                <div className="name">
+                  <Typography gutterBottom variant="h5" component="div">
+                    {workPlace.name}
 
-                <Box
-                  sx={{
-                    "& > legend": { mt: 2 },
-                  }}
-                >
-                  <Typography component="legend"></Typography>
-                  <Rating
-                    name="read-only"
-                    value={parseInt(workPlace.rating)}
-                    readOnly
-                  />
-                </Box>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {workPlace.address}
-              </Typography>
-            </CardContent>
-
+                    <Box
+                      sx={{
+                        "& > legend": { mt: 2 },
+                      }}
+                    >
+                      <Typography component="legend"></Typography>
+                      <Rating
+                        name="read-only"
+                        value={parseInt(workPlace.rating)}
+                        readOnly
+                      />
+                    </Box>
+                  </Typography>
+                </div>
+                <div className="address">
+                  <Typography variant="body2" color="text.secondary">
+                    {workPlace.address}
+                  </Typography>
+                </div>
+                <div className="map">
+                  <MapContainer
+                    center={[workPlace.latitude, workPlace.longitude]}
+                    zoom={13}
+                    scrollWheelZoom={false}
+                  >
+                    <TileLayer
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenSrreetMap</a>'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker
+                      position={[workPlace.latitude, workPlace.longitude]}
+                    >
+                      <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                      </Popup>
+                    </Marker>
+                  </MapContainer>
+                </div>
+              </CardContent>
+            </div>
             <div>
               {!sorted
                 ? "loading"

@@ -2,3 +2,8 @@ img {
   height: 200px;
   width: 200px;
 }
+
+.leaflet-container {
+  width: 40%;
+  height: 30vh;
+}

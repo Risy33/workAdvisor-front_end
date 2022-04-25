@@ -3,3 +3,18 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* 
+.map {
+  display: flex;
+  justify-content: end;
+}
+.address {
+  display: flex;
+  justify-content: end;
+  margin-top: 10px;
+}
+.name {
+  display: flex;
+  justify-content: end;
+} */
