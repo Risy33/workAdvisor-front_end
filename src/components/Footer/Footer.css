@@ -6,17 +6,15 @@
 
 .footer-container {
   background-color: green;
-  padding-bottom: 4rem;
+  padding: 4rem 0;
 }
 
 .footer {
   width: 80%;
-  height: 40vh;
   background-color: green;
   color: white;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   margin: 0 auto;
 }
 

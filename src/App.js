@@ -32,7 +32,10 @@ function App() {
         </Route>
         <Route path="/workPlaces/details/:id" element={<Details />} />
       </Routes>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
+      
     </div>
   );
 }

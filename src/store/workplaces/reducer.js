@@ -5,7 +5,11 @@ import {
   SET_WORK_PLACE_ID,
   SET_EXPERIENCES,
 } from "./actions";
-import { ADD_EXPERIENCE, SET_USEFUL } from "../experiences/actions";
+import {
+  ADD_EXPERIENCE,
+  DELETE_EXPERIENCE,
+  SET_USEFUL,
+} from "../experiences/actions";
 const initialState = {
   loading: null,
   workPlaces: [],
@@ -79,7 +83,15 @@ export default function workPlacesReducer(state = initialState, action) {
         },
       };
     }
-
+    case DELETE_EXPERIENCE: {
+      const deleteExperience = state.workPlace.experiences.filter(
+        (exp) => exp.id !== action.payload
+      );
+      return {
+        ...state,
+        workPlace: { ...state.workPlace, experiences: deleteExperience },
+      };
+    }
     default: {
       return state;
     }

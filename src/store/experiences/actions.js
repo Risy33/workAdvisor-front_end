@@ -10,6 +10,7 @@ export const RESET_EXPERIENCES = "experiences/resetExperiences";
 export const FILTER_EXPERIENCES_BY_RATE = "experiences/filterByRate";
 export const SET_USEFUL = "experiences/setUseful";
 export const ADD_EXPERIENCE = "experiences/newExperience";
+export const DELETE_EXPERIENCE = "experiences/deleteStory";
 
 const startLoading = () => ({
   type: SET_LOADING,
@@ -89,6 +90,32 @@ export const createExperience = (
         type: "experiences/newExperience",
         payload: { experience: res.data },
       });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+export const deleteStory = (storyId) => ({
+  type: DELETE_EXPERIENCE,
+  payload: storyId,
+});
+
+export const deleteMyExperience = (id) => {
+  return async (dispatch, getState) => {
+    dispatch(startLoading());
+
+    const { token } = selectUser(getState());
+
+    try {
+      const response = await axios.delete(`${apiUrl}/experiences/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log(`experience deleted?`, response.data);
+      dispatch(deleteStory(id));
     } catch (e) {
       console.log(e.message);
     }

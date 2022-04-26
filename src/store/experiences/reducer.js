@@ -1,4 +1,4 @@
-import { ADD_EXPERIENCE, SET_EXPERIENCES, SET_LOADING } from "./actions";
+import { DELETE_EXPERIENCE, SET_EXPERIENCES, SET_LOADING } from "./actions";
 
 const initialState = {
   loading: null,
@@ -20,6 +20,7 @@ export default function experiencesReducer(state = initialState, action) {
         allExperiences: [...action.payload.experiences],
       };
     }
+
 
     default: {
       return state;

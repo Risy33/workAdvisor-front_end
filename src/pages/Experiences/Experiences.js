@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,27 +13,40 @@ import { CardHeader, Avatar, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Link from "@mui/material/Link";
 import { updateUseful } from "../../store/experiences/actions";
-import { selectToken, selectUser } from "../../store/user/selector";
+import { selectUser } from "../../store/user/selector";
 import moment from "moment";
+import Pag from "../../components/Pagination/Pagination";
 
 export default function Experiences() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [expPerPage, setExpPerPage] = useState(2);
+
   const dispatch = useDispatch();
 
   const experiences = useSelector(selectAllExperiences);
-  const token = useSelector(selectToken);
   const user = useSelector(selectUser);
-  console.log("user", user);
 
   useEffect(() => {
     dispatch(fetchAllExperiences);
   }, [dispatch]);
+
+  const indexOfLastExperience = currentPage * expPerPage;
+  const indexOfFirstExperience = indexOfLastExperience - expPerPage;
+  const currentExperience = experiences.slice(
+    indexOfFirstExperience,
+    indexOfLastExperience
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
       <Header />
       <div className="card-container">
         {experiences
-          ? experiences.map((e) => {
+          ? currentExperience.map((e) => {
               return (
                 <div key={e.id} className="card">
                   <Card>
@@ -86,6 +99,11 @@ export default function Experiences() {
               );
             })
           : "loading"}
+        <Pag
+          expPerPage={expPerPage}
+          totalExp={experiences.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );

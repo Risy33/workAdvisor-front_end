@@ -3,3 +3,8 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+p {
+  color: blue;
+  transition: 0.3s ease-out;
+}

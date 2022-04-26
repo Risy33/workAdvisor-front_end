@@ -119,27 +119,4 @@ export const deleteStory = (storyId) => ({
   payload: storyId,
 });
 
-// export const deleteMyExperience = (experienceId) => {
-//   return async (dispatch, getState) => {
-//     dispatch(appLoading());
 
-//     const {  token } = selectUser(getState());
-
-//     try {
-//       const response = await axios.delete(
-//         `${apiUrl}/workplaces/${workplaceId}/experiences/${experienceId}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-
-//       console.log(`experience deleted?`, response.data);
-//       dispatch(deleteStory(experienceId));
-//       dispatch(appDoneLoading());
-//     } catch (e) {
-//       console.log(e.message);
-//     }
-//   };
-// };

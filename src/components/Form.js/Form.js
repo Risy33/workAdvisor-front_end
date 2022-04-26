@@ -16,8 +16,13 @@ export default function Form() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleForm = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(createExperience(title, description, image));
+    handleClose();
+    setImage("");
+    setDescription("");
+    setTitle("");
   };
   const style = {
     position: "absolute",
@@ -43,37 +48,40 @@ export default function Form() {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
+              Your Story
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <form onInput={handleForm}>
-                <input
-                  type="text"
-                  placeholder="Title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="image"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                />
-                <button
-                  onClick={() =>
-                    dispatch(createExperience(title, description, image))
-                  }
-                >
-                  Submit
-                </button>
-              </form>
-            </Typography>
+            <Typography
+              id="modal-modal-description"
+              sx={{ mt: 2 }}
+            ></Typography>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                placeholder="description"
+                value={description}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              />
+              <input
+                type="text"
+                placeholder="image"
+                value={image}
+                onChange={(e) => {
+                  setImage(e.target.value);
+                }}
+              />
+              
+              <button type="submit">Submit</button>
+            </form>
           </Box>
         </Modal>
       </div>

@@ -23,7 +23,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Header from "../../components/Header/Header";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
-import { deleteMyExperience } from "../../store/user/actions";
+import { deleteMyExperience } from "../../store/experiences/actions";
 
 export default function Details() {
   const dispatch = useDispatch();
@@ -96,7 +96,7 @@ export default function Details() {
               <CardContent>
                 <CardMedia
                   component="img"
-                  sx={{ width: "30rem", height: "20rem" }}
+                  sx={{ width: "40rem", height: "20rem" }}
                   image={workPlace.image}
                   alt={workPlace.name}
                 />
@@ -170,7 +170,7 @@ export default function Details() {
                         {moment(e.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
                       </Typography>
                       <CardActions>
-                        <Button size="small">Was it useful? {e.useful}</Button>
+                        <p>Was it useful? {e.useful}</p>
                         <button
                           onClick={() => {
                             dispatch(updateUseful(e.id, e.useful));
@@ -179,13 +179,13 @@ export default function Details() {
                           👍
                         </button>
                       </CardActions>
-                      {/* {user.isAdmin ? (
-                            <button
-                              onClick={() => dispatch(deleteMyExperience(e.id))}
-                            >
-                              Delete Experience
-                            </button>
-                          ) : null} */}
+                      {user.id === e.userId && (
+                        <button
+                          onClick={() => dispatch(deleteMyExperience(e.id))}
+                        >
+                          Delete Experience
+                        </button>
+                      )}
                     </Card>
                   );
                 })}
