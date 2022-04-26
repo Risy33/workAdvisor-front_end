@@ -10,12 +10,14 @@ import { fetchWorkPlaces } from "./store/workplaces/actions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Details from "./pages/Workplaces/Details";
+import { getUserWithStoredToken } from "./store/user/actions";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchWorkPlaces);
+    dispatch(getUserWithStoredToken());
   }, []);
 
   return (

@@ -4,3 +4,13 @@
   box-sizing: border-box;
   font-family: "Roboto";
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+div {
+  width: 100%;
+}

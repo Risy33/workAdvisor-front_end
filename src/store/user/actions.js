@@ -1,6 +1,12 @@
 import { apiUrl } from "../config/constant";
 import axios from "axios";
 import { selectToken } from "./selector";
+import {
+  appDoneLoading,
+  showMessageWithTimeout,
+  setMessage,
+} from "../appState/actions";
+import { selectUser } from "./selector";
 
 export const APP_LOADING = "APP_LOADING";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -35,17 +41,17 @@ export const signUp = (name, email, password, isAdmin) => {
       });
 
       dispatch(loginSuccess(response.data));
-      //   dispatch(showMessageWithTimeout("success", true, "account created"));
-      //   dispatch(appDoneLoading());
+      dispatch(showMessageWithTimeout("success", true, "account created"));
+      dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        // dispatch(setMessage("danger", true, error.response.data.message));
+        dispatch(setMessage("danger", true, error.response.data.message));
       } else {
         console.log(error.message);
-        // dispatch(setMessage("danger", true, error.message));
+        dispatch(setMessage("danger", true, error.message));
       }
-      //   dispatch(appDoneLoading());
+      dispatch(appDoneLoading());
     }
   };
 };
@@ -60,17 +66,17 @@ export const login = (email, password) => {
       });
 
       dispatch(loginSuccess(response.data));
-      //   dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
-      //   dispatch(appDoneLoading());
+      dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
+      dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        // dispatch(setMessage("danger", true, error.response.data.message));
+        dispatch(setMessage("danger", true, error.response.data.message));
       } else {
         console.log(error.message);
-        // dispatch(setMessage("danger", true, error.message));
+        dispatch(setMessage("danger", true, error.message));
       }
-      //   dispatch(appDoneLoading());
+      dispatch(appDoneLoading());
     }
   };
 };
@@ -93,7 +99,7 @@ export const getUserWithStoredToken = () => {
 
       // token is still valid
       dispatch(tokenStillValid(response.data));
-      //   dispatch(appDoneLoading());
+      dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.message);
@@ -103,7 +109,37 @@ export const getUserWithStoredToken = () => {
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
       dispatch(logOut());
-      //   dispatch(appDoneLoading());
+      dispatch(appDoneLoading());
     }
   };
 };
+
+export const deleteStory = (storyId) => ({
+  type: "user/deleteStory",
+  payload: storyId,
+});
+
+// export const deleteMyExperience = (experienceId) => {
+//   return async (dispatch, getState) => {
+//     dispatch(appLoading());
+
+//     const {  token } = selectUser(getState());
+
+//     try {
+//       const response = await axios.delete(
+//         `${apiUrl}/workplaces/${workplaceId}/experiences/${experienceId}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+
+//       console.log(`experience deleted?`, response.data);
+//       dispatch(deleteStory(experienceId));
+//       dispatch(appDoneLoading());
+//     } catch (e) {
+//       console.log(e.message);
+//     }
+//   };
+// };

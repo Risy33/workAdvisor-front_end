@@ -18,7 +18,6 @@ export default function user(state = initialState, action) {
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
-
     default: {
       return state;
     }

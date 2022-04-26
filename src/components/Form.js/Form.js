@@ -33,8 +33,8 @@ export default function Form() {
 
   return (
     <div>
+      <Button onClick={handleOpen}>Add your Story</Button>
       <div>
-        <Button onClick={handleOpen}>Add your Story</Button>
         <Modal
           open={open}
           onClose={handleClose}

@@ -24,12 +24,10 @@ export default function Experiences() {
   const user = useSelector(selectUser);
   console.log("user", user);
 
-  console.log("token", token);
   useEffect(() => {
     dispatch(fetchAllExperiences);
   }, [dispatch]);
 
-  console.log(experiences);
   return (
     <div>
       <Header />

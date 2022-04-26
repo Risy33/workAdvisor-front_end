@@ -9,6 +9,7 @@ export const FILTER_EXPERIENCES = "experiences/filterExperiences";
 export const RESET_EXPERIENCES = "experiences/resetExperiences";
 export const FILTER_EXPERIENCES_BY_RATE = "experiences/filterByRate";
 export const SET_USEFUL = "experiences/setUseful";
+export const ADD_EXPERIENCE = "experiences/newExperience";
 
 const startLoading = () => ({
   type: SET_LOADING,
@@ -29,7 +30,7 @@ export const setUseful = (useful) => {
 export const fetchAllExperiences = async (dispatch, getState) => {
   dispatch(startLoading());
   const response = await axios.get(`${apiUrl}/experiences`);
-  console.log("response", response.data);
+
   dispatch(getExperiences(response.data.experiences));
 };
 
@@ -66,7 +67,7 @@ export const createExperience = (
       const workplace = selectWorkPlace(getState());
       console.log("title", title, description, image, status, userId);
 
-      await axios.post(
+      const res = await axios.post(
         `${apiUrl}/experiences/newExperience`,
         {
           title,
@@ -83,9 +84,10 @@ export const createExperience = (
           },
         }
       );
+
       dispatch({
         type: "experiences/newExperience",
-        payload: { title, description, image, useful },
+        payload: { experience: res.data },
       });
     } catch (e) {
       console.log(e.message);

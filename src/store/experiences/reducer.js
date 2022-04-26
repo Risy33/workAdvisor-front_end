@@ -1,4 +1,4 @@
-import { SET_EXPERIENCES, SET_LOADING } from "./actions";
+import { ADD_EXPERIENCE, SET_EXPERIENCES, SET_LOADING } from "./actions";
 
 const initialState = {
   loading: null,

@@ -12,7 +12,7 @@ import { CardActions } from "@mui/material";
 import { Button } from "@mui/material";
 import { updateUseful } from "../../store/experiences/actions";
 import "./Details.css";
-import { selectToken } from "../../store/user/selector";
+import { selectToken, selectUser } from "../../store/user/selector";
 import Form from "../../components/Form.js/Form";
 import moment from "moment";
 import InputLabel from "@mui/material/InputLabel";
@@ -23,6 +23,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Header from "../../components/Header/Header";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { deleteMyExperience } from "../../store/user/actions";
 
 export default function Details() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export default function Details() {
 
   const workPlace = useSelector(selectWorkPlace);
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   const { id } = params;
   const [sorted, setSorted] = useState([]);
@@ -62,47 +64,42 @@ export default function Details() {
         setSorted([...workPlace.experiences]);
     }
   };
-  const position = [52.37306882922609, 4.892661365801631];
 
   return (
     <div>
       <Header />
-      <div>
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Filter
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-autowidth-label"
-            id="demo-simple-select-autowidth"
-            onChange={(e) => sort(e.target.value)}
-            autoWidth
-            value={""}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"date"}>Date</MenuItem>
-            <MenuItem value={"rating"}>Rating</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
+
+      <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <InputLabel id="demo-simple-select-autowidth-label">Filter</InputLabel>
+        <Select
+          labelId="demo-simple-select-autowidth-label"
+          id="demo-simple-select-autowidth"
+          onChange={(e) => sort(e.target.value)}
+          autoWidth
+          value={""}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"date"}>Date</MenuItem>
+          <MenuItem value={"rating"}>Rating</MenuItem>
+        </Select>
+      </FormControl>
+
       {token ? <Form /> : null}
       {!workPlace ? (
         "loading"
       ) : (
-        <div className="details_workPlaces">
-          
-          <Card sx={{ width: "60rem" }}>
-            <CardMedia
-              component="img"
-              sx={{ width: "30rem", height: "20rem" }}
-              image={workPlace.image}
-              alt={workPlace.name}
-            />
-            
-            <div className="right-side">
+        <div className="workplace-page">
+          <Card sx={{ width: 1 }} className="workplace-card">
+            <div className="workplace-card-details">
               <CardContent>
+                <CardMedia
+                  component="img"
+                  sx={{ width: "30rem", height: "20rem" }}
+                  image={workPlace.image}
+                  alt={workPlace.name}
+                />
                 <div className="name">
                   <Typography gutterBottom variant="h5" component="div">
                     {workPlace.name}
@@ -121,87 +118,80 @@ export default function Details() {
                     </Box>
                   </Typography>
                 </div>
-                <div className="address">
-                  <Typography variant="body2" color="text.secondary">
-                    {workPlace.address}
-                  </Typography>
-                </div>
-                <div className="map">
-                  <MapContainer
-                    center={[workPlace.latitude, workPlace.longitude]}
-                    zoom={13}
-                    scrollWheelZoom={false}
-                  >
-                    <TileLayer
-                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenSrreetMap</a>'
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker
-                      position={[workPlace.latitude, workPlace.longitude]}
-                    >
-                      <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                      </Popup>
-                    </Marker>
-                  </MapContainer>
-                </div>
               </CardContent>
             </div>
-            <div>
-              {!sorted
-                ? "loading"
-                : sorted.map((e) => {
-                    return (
-                      <div key={e.id}>
-                        <Card sx={{ maxWidth: "600px", margin: 5 }}>
-                          <Typography
-                            gutterBottom
-                            variant="h6"
-                            color="text.secondary"
-                          >
-                            {e.title}
-                          </Typography>
-                          <CardMedia
-                            component="img"
-                            image={e.image}
-                            alt="restaurant pictures"
-                          />
-                          <Typography variant="body3" color="text.secondary">
-                            {e.description}
-                          </Typography>
-                          <Typography>
-                            {moment(e.createdAt).format(
-                              "MMMM Do YYYY, h:mm:ss a"
-                            )}
-                          </Typography>
-                          <CardActions>
-                            <Button size="small">
-                              Was it useful? {e.useful}
-                            </Button>
-                            <button
-                              onClick={() => {
-                                dispatch(updateUseful(e.id, e.useful));
-                              }}
-                            >
-                              👍
-                            </button>
-                          </CardActions>
-                        </Card>
-                      </div>
-                    );
-                  })}
-            </div>
+
+            <CardContent className="card-details-address">
+              <div className="map">
+                <MapContainer
+                  center={[workPlace.latitude, workPlace.longitude]}
+                  zoom={13}
+                  scrollWheelZoom={false}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenSrreetMap</a>'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker position={[workPlace.latitude, workPlace.longitude]}>
+                    <Popup>{workPlace.name}</Popup>
+                  </Marker>
+                </MapContainer>
+              </div>
+              <div className="address">
+                <Typography variant="body2" color="text.secondary">
+                  {workPlace.address}
+                </Typography>
+              </div>
+            </CardContent>
           </Card>
+
+          <div className="comments-section">
+            {!sorted
+              ? "loading"
+              : sorted.map((e) => {
+                  return (
+                    <Card sx={{ width: "50%", margin: 5 }} key={e.id}>
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        color="text.secondary"
+                      >
+                        {e.title}
+                      </Typography>
+                      <CardMedia
+                        component="img"
+                        image={e.image}
+                        alt="restaurant pictures"
+                      />
+                      <Typography variant="body3" color="text.secondary">
+                        {e.description}
+                      </Typography>
+                      <Typography>
+                        {moment(e.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
+                      </Typography>
+                      <CardActions>
+                        <Button size="small">Was it useful? {e.useful}</Button>
+                        <button
+                          onClick={() => {
+                            dispatch(updateUseful(e.id, e.useful));
+                          }}
+                        >
+                          👍
+                        </button>
+                      </CardActions>
+                      {/* {user.isAdmin ? (
+                            <button
+                              onClick={() => dispatch(deleteMyExperience(e.id))}
+                            >
+                              Delete Experience
+                            </button>
+                          ) : null} */}
+                    </Card>
+                  );
+                })}
+          </div>
         </div>
       )}
     </div>
   );
 }
-//  <div>
-//    Sort by:
-//    <select onChange={(e) => sort(e.target.value)}>
-//      <option value="">Select...</option>
-//      <option value="rating">Rating</option>
-//      <option value="date">Date</option>
-//    </select>
-//  </div>;
