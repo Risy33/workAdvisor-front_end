@@ -1,53 +1,19 @@
-.workplace-page {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-}
-
-.workplace-card {
-  display: flex;
-}
-
-.workplace-card-details {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  align-items: center;
-}
-
-.card-details-address {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-}
-
-.map {
-  width: 100%;
-}
-
 .leaflet-container {
   width: 100%;
-  height: 20rem;
+  height: 20vh;
 }
-
-.comments-section {
+.details_workPlaces {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-/* 
+.details-name-address {
+  width: 50%;
+  float: left;
+}
 .map {
-  display: flex;
+  width: 30%;
+  float: right;
   justify-content: end;
+  margin-bottom: 10px;
 }
-.address {
-  display: flex;
-  justify-content: end;
-  margin-top: 10px;
-}
-.name {
-  display: flex;
-  justify-content: end;
-} */

@@ -25,6 +25,7 @@ import Header from "../../components/Header/Header";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import { deleteMyExperience } from "../../store/experiences/actions";
 
+
 export default function Details() {
   const dispatch = useDispatch();
   const params = useParams();
@@ -68,39 +69,49 @@ export default function Details() {
   return (
     <div>
       <Header />
-
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Filter</InputLabel>
-        <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          onChange={(e) => sort(e.target.value)}
-          autoWidth
-          value={""}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"date"}>Date</MenuItem>
-          <MenuItem value={"rating"}>Rating</MenuItem>
-        </Select>
-      </FormControl>
-
+      <div>
+        <FormControl sx={{ m: 1, minWidth: 80 }}>
+          <InputLabel id="demo-simple-select-autowidth-label">
+            Filter
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            onChange={(e) => sort(e.target.value)}
+            autoWidth
+            value={""}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={"date"}>Date</MenuItem>
+            <MenuItem value={"rating"}>Rating</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
       {token ? <Form /> : null}
       {!workPlace ? (
         "loading"
       ) : (
-        <div className="workplace-page">
-          <Card sx={{ width: 1 }} className="workplace-card">
-            <div className="workplace-card-details">
-              <CardContent>
-                <CardMedia
-                  component="img"
-                  sx={{ width: "40rem", height: "20rem" }}
-                  image={workPlace.image}
-                  alt={workPlace.name}
-                />
-                <div className="name">
+        <div className="details_workPlaces">
+          <Card
+            sx={{
+              width: "100%",
+              marginTop: "100px",
+              marginLeft: "300px",
+              marginRight: "300px",
+            }}
+          >
+            <CardMedia
+              component="img"
+              sx={{ height: "20rem" }}
+              image={workPlace.image}
+              alt={workPlace.name}
+            />
+
+            <CardContent>
+              <div>
+                <div className="details-name-address">
                   <Typography gutterBottom variant="h5" component="div">
                     {workPlace.name}
 
@@ -115,80 +126,90 @@ export default function Details() {
                         value={parseInt(workPlace.rating)}
                         readOnly
                       />
+                      
+                      <Typography gutterBottom variant="h6" component="div">
+                        {workPlace.type}
+                      </Typography>
                     </Box>
                   </Typography>
                 </div>
-              </CardContent>
-            </div>
-
-            <CardContent className="card-details-address">
-              <div className="map">
-                <MapContainer
-                  center={[workPlace.latitude, workPlace.longitude]}
-                  zoom={13}
-                  scrollWheelZoom={false}
-                >
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenSrreetMap</a>'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <Marker position={[workPlace.latitude, workPlace.longitude]}>
-                    <Popup>{workPlace.name}</Popup>
-                  </Marker>
-                </MapContainer>
-              </div>
-              <div className="address">
-                <Typography variant="body2" color="text.secondary">
-                  {workPlace.address}
-                </Typography>
+                <div className="map">
+                  <MapContainer
+                    center={[workPlace.latitude, workPlace.longitude]}
+                    zoom={13}
+                    scrollWheelZoom={false}
+                  >
+                    <TileLayer
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenSrreetMap</a>'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker
+                      position={[workPlace.latitude, workPlace.longitude]}
+                    >
+                      <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                      </Popup>
+                    </Marker>
+                  </MapContainer>
+                  <Typography variant="body2" color="text.secondary">
+                    {workPlace.address}
+                  </Typography>
+                </div>
               </div>
             </CardContent>
           </Card>
-
-          <div className="comments-section">
-            {!sorted
-              ? "loading"
-              : sorted.map((e) => {
-                  return (
-                    <Card sx={{ width: "50%", margin: 5 }} key={e.id}>
-                      <Typography
-                        gutterBottom
-                        variant="h6"
-                        color="text.secondary"
-                      >
-                        {e.title}
-                      </Typography>
-                      <CardMedia
-                        component="img"
-                        image={e.image}
-                        alt="restaurant pictures"
-                      />
-                      <Typography variant="body3" color="text.secondary">
-                        {e.description}
-                      </Typography>
-                      <Typography>
-                        {moment(e.createdAt).format("MMMM Do YYYY, h:mm:ss a")}
-                      </Typography>
-                      <CardActions>
-                        <p>Was it useful? {e.useful}</p>
-                        <button
-                          onClick={() => {
-                            dispatch(updateUseful(e.id, e.useful));
-                          }}
-                        >
-                          👍
-                        </button>
-                      </CardActions>
-                      {user.id === e.userId && (
-                        <button
-                          onClick={() => dispatch(deleteMyExperience(e.id))}
-                        >
-                          Delete Experience
-                        </button>
-                      )}
-                    </Card>
-                  );
-                })}
+          <div>
+            <div>
+              {!sorted
+                ? "loading"
+                : sorted.map((e) => {
+                    return (
+                      <div key={e.id}>
+                        <Card sx={{ maxWidth: "600px", margin: 5 }}>
+                          <Typography
+                            gutterBottom
+                            variant="h6"
+                            color="text.secondary"
+                          >
+                            {e.title}
+                          </Typography>
+                          <CardMedia
+                            component="img"
+                            image={e.image}
+                            alt="restaurant pictures"
+                          />
+                          <Typography variant="body3" color="text.secondary">
+                            {e.description}
+                          </Typography>
+                          <Typography>
+                            {moment(e.createdAt).format(
+                              "MMMM Do YYYY, h:mm:ss a"
+                            )}
+                          </Typography>
+                          <CardActions>
+                            <Button size="small">
+                              Was it useful? {e.useful}
+                            </Button>
+                            <button
+                              onClick={() => {
+                                dispatch(updateUseful(e.id, e.useful));
+                              }}
+                            >
+                              👍
+                            </button>
+                          </CardActions>
+                          {user.id === e.userId && (
+                            <button
+                              onClick={() => dispatch(deleteMyExperience(e.id))}
+                            >
+                              Delete Experience
+                            </button>
+                          )}
+                        </Card>
+                      </div>
+                    );
+                  })}
+            </div>
           </div>
         </div>
       )}

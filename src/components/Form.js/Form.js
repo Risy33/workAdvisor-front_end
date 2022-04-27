@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import "./Form.css";
 
 export default function Form() {
   const [title, setTitle] = useState("");
@@ -29,7 +30,8 @@ export default function Form() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: "800px",
+    height: "500px",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -54,7 +56,8 @@ export default function Form() {
               id="modal-modal-description"
               sx={{ mt: 2 }}
             ></Typography>
-            <form onSubmit={handleSubmit}>
+            <form className="submission-form" onSubmit={handleSubmit}>
+              <label>Title</label>
               <input
                 type="text"
                 placeholder="Title"
@@ -63,6 +66,8 @@ export default function Form() {
                   setTitle(e.target.value);
                 }}
               />
+
+              <label>Description</label>
               <input
                 type="text"
                 placeholder="description"
@@ -71,6 +76,8 @@ export default function Form() {
                   setDescription(e.target.value);
                 }}
               />
+
+              <label>Image</label>
               <input
                 type="text"
                 placeholder="image"
@@ -79,8 +86,8 @@ export default function Form() {
                   setImage(e.target.value);
                 }}
               />
-              
-              <button type="submit">Submit</button>
+
+              <button className="submit-button" type="submit">Submit</button>
             </form>
           </Box>
         </Modal>

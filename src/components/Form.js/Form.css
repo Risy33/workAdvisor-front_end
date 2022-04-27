@@ -1,0 +1,14 @@
+.submission-form {
+  margin: 2rem;
+  border: solid green;
+  padding: 2rem;
+}
+label {
+  display: block;
+}
+input,
+textarea {
+  display: block;
+  width: 100%;
+}
+
