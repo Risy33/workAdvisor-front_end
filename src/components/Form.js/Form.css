@@ -2,13 +2,35 @@
   margin: 2rem;
   border: solid green;
   padding: 2rem;
+  border-radius: 5px;
 }
 label {
   display: block;
+  padding: 1rem 0 0.5rem;
+  font-size: 20px;
 }
 input,
 textarea {
   display: block;
   width: 100%;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  border: 2px solid green;
+  padding: 0.5rem;
+  font-size: 18px;
+  border-radius: 5px;
 }
 
+.submit-button {
+  border: 1;
+  background-color: green;
+  padding: 0.5rem;
+  color: white;
+  margin: 1rem, 0;
+  text-transform: uppercase;
+}
+
+.submit-button:hover {
+  background-color: lightgreen;
+  cursor: pointer;
+}

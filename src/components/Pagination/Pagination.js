@@ -1,7 +1,5 @@
 import React from "react";
 import "./Pagination.css";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
 export default function Pag({ expPerPage, totalExp, paginate }) {
   const pageNumbers = [];
@@ -11,11 +9,9 @@ export default function Pag({ expPerPage, totalExp, paginate }) {
   }
   return (
     <div>
-      <ul>
+      <ul className="paginationBttns">
         {pageNumbers.map((number) => (
-          <Stack spacing={2}>
-            <Pagination onClick={() => paginate(number)} />
-          </Stack>
+          <li onClick={() => paginate(number)}>{number}</li>
         ))}
       </ul>
     </div>

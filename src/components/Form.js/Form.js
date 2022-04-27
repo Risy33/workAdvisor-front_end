@@ -31,7 +31,7 @@ export default function Form() {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "800px",
-    height: "500px",
+    height: "550px",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -68,7 +68,7 @@ export default function Form() {
               />
 
               <label>Description</label>
-              <input
+              <textarea
                 type="text"
                 placeholder="description"
                 value={description}
@@ -87,7 +87,9 @@ export default function Form() {
                 }}
               />
 
-              <button className="submit-button" type="submit">Submit</button>
+              <button className="submit-button" type="submit">
+                Submit
+              </button>
             </form>
           </Box>
         </Modal>

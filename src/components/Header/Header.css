@@ -1,9 +1,10 @@
 .header {
   height: 130px;
-  background-color: green;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQga95H47bqjHJH2fXTi-FaIhjbV1326oVn2A&usqp=CAU);
   display: flex;
   justify-content: space-around;
   align-items: center;
   text-align: center;
   vertical-align: middle;
+  ;
 }

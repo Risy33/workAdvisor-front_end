@@ -46,7 +46,14 @@ export default function ProminentAppBar() {
               color: "green",
             }}
           >
-            <Link style={{ color: "green" }} to="/">
+            <Link
+              style={{
+                color: "green",
+                textDecoration: "none",
+                
+              }}
+              to="/"
+            >
               Work Advisor
             </Link>
           </Typography>

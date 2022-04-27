@@ -25,7 +25,6 @@ import Header from "../../components/Header/Header";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import { deleteMyExperience } from "../../store/experiences/actions";
 
-
 export default function Details() {
   const dispatch = useDispatch();
   const params = useParams();
@@ -112,7 +111,7 @@ export default function Details() {
             <CardContent>
               <div>
                 <div className="details-name-address">
-                  <Typography gutterBottom variant="h5" component="div">
+                  <Typography gutterBottom variant="h4" component="div">
                     {workPlace.name}
 
                     <Box
@@ -120,16 +119,15 @@ export default function Details() {
                         "& > legend": { mt: 2 },
                       }}
                     >
+                      <Typography gutterBottom variant="h5" component="div">
+                        {workPlace.type}
+                      </Typography>
                       <Typography component="legend"></Typography>
                       <Rating
                         name="read-only"
                         value={parseInt(workPlace.rating)}
                         readOnly
                       />
-                      
-                      <Typography gutterBottom variant="h6" component="div">
-                        {workPlace.type}
-                      </Typography>
                     </Box>
                   </Typography>
                 </div>
@@ -146,9 +144,7 @@ export default function Details() {
                     <Marker
                       position={[workPlace.latitude, workPlace.longitude]}
                     >
-                      <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                      </Popup>
+                      <Popup>{workPlace.name}</Popup>
                     </Marker>
                   </MapContainer>
                   <Typography variant="body2" color="text.secondary">
@@ -165,7 +161,20 @@ export default function Details() {
                 : sorted.map((e) => {
                     return (
                       <div key={e.id}>
-                        <Card sx={{ maxWidth: "600px", margin: 5 }}>
+                        <Card
+                          sx={{
+                            minWidth: "800px",
+                            maxWidth: "800px",
+                            margin: 5,
+                          }}
+                        >
+                          <Typography
+                            gutterBottom
+                            variant="h6"
+                            color="text.primary"
+                          >
+                            {user.name}
+                          </Typography>
                           <Typography
                             gutterBottom
                             variant="h6"
@@ -187,23 +196,22 @@ export default function Details() {
                             )}
                           </Typography>
                           <CardActions>
-                            <Button size="small">
-                              Was it useful? {e.useful}
-                            </Button>
-                            <button
-                              onClick={() => {
-                                dispatch(updateUseful(e.id, e.useful));
-                              }}
+                            <Button
+                              sx={{ color: "black" }}
+                              onClick={() =>
+                                dispatch(updateUseful(e.id, e.useful))
+                              }
+                              size="small"
                             >
-                              👍
-                            </button>
+                              useful? {e.useful} 👍
+                            </Button>
                           </CardActions>
                           {user.id === e.userId && (
-                            <button
+                            <Button
                               onClick={() => dispatch(deleteMyExperience(e.id))}
                             >
                               Delete Experience
-                            </button>
+                            </Button>
                           )}
                         </Card>
                       </div>

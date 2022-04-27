@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="App">
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Experiences />} />
@@ -35,7 +35,6 @@ function App() {
       <div>
         <Footer />
       </div>
-      
     </div>
   );
 }

@@ -74,7 +74,10 @@ export default function WorkPlaces() {
                       </Typography>
                     </CardContent>
 
-                    <Button variant="contained">
+                    <Button
+                      sx={{ backgroundColor: "green" }}
+                      variant="contained"
+                    >
                       <Link
                         to={`/workplaces/details/${workPlace.id}`}
                         style={{ color: "white" }}

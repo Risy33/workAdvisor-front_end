@@ -16,10 +16,11 @@ import { updateUseful } from "../../store/experiences/actions";
 import { selectUser } from "../../store/user/selector";
 import moment from "moment";
 import Pag from "../../components/Pagination/Pagination";
+import { deleteMyExperience } from "../../store/experiences/actions";
 
 export default function Experiences() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [expPerPage, setExpPerPage] = useState(2);
+  const [expPerPage, setExpPerPage] = useState(5);
 
   const dispatch = useDispatch();
 
@@ -80,7 +81,10 @@ export default function Experiences() {
                       </Typography>
                     </CardContent>
 
-                    <Button variant="contained">
+                    <Button
+                      sx={{ backgroundColor: "green" }}
+                      variant="contained"
+                    >
                       <Link
                         href={`/workplaces/details/${e.workPlace.id}`}
                         style={{ color: "white" }}
@@ -88,12 +92,22 @@ export default function Experiences() {
                         Go to stories
                       </Link>
                     </Button>
+
                     <Button
+                      sx={{ color: "black" }}
                       onClick={() => dispatch(updateUseful(e.id, e.useful))}
                       size="small"
                     >
-                      Was it useful? {e.useful} 👍
+                      useful? {e.useful} 👍
                     </Button>
+                    <br />
+                    {user.id === e.userId && (
+                      <Button
+                        onClick={() => dispatch(deleteMyExperience(e.id))}
+                      >
+                        Delete Experience
+                      </Button>
+                    )}
                   </Card>
                 </div>
               );
