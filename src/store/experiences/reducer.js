@@ -1,4 +1,5 @@
-import { DELETE_EXPERIENCE, SET_EXPERIENCES, SET_LOADING } from "./actions";
+import { SET_EXPERIENCES, SET_LOADING } from "./actions";
+import { DELETE_EXPERIENCE } from "../experiences/actions";
 
 const initialState = {
   loading: null,
@@ -21,6 +22,15 @@ export default function experiencesReducer(state = initialState, action) {
       };
     }
 
+    case DELETE_EXPERIENCE: {
+      const deleteExperience = state.allExperiences.filter(
+        (exp) => exp.id !== action.payload
+      );
+      return {
+        ...state,
+        allExperiences: deleteExperience,
+      };
+    }
 
     default: {
       return state;

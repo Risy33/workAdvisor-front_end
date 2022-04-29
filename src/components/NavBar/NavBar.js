@@ -50,7 +50,6 @@ export default function ProminentAppBar() {
               style={{
                 color: "green",
                 textDecoration: "none",
-                
               }}
               to="/"
             >
@@ -82,7 +81,6 @@ export default function ProminentAppBar() {
           </IconButton>
           {!token ? (
             <div>
-              {" "}
               <IconButton
                 size="large"
                 aria-label="display more actions"

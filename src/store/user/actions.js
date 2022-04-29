@@ -29,7 +29,7 @@ const tokenStillValid = (userWithoutToken) => ({
 
 export const logOut = () => ({ type: LOG_OUT });
 
-export const signUp = (name, email, password, isAdmin) => {
+export const signUp = (name, email, password, isAdmin, navigate, toast) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
@@ -41,8 +41,13 @@ export const signUp = (name, email, password, isAdmin) => {
       });
 
       dispatch(loginSuccess(response.data));
-      dispatch(showMessageWithTimeout("success", true, "account created"));
-      dispatch(appDoneLoading());
+      navigate("/");
+      toast.success("Welcome to Work Advisor", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 2000,
+      });
+      // dispatch(showMessageWithTimeout("success", true, "account created"));
+      // dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
@@ -51,7 +56,7 @@ export const signUp = (name, email, password, isAdmin) => {
         console.log(error.message);
         dispatch(setMessage("danger", true, error.message));
       }
-      dispatch(appDoneLoading());
+      // dispatch(appDoneLoading());
     }
   };
 };
@@ -113,10 +118,3 @@ export const getUserWithStoredToken = () => {
     }
   };
 };
-
-export const deleteStory = (storyId) => ({
-  type: "user/deleteStory",
-  payload: storyId,
-});
-
-

@@ -18,9 +18,10 @@ import moment from "moment";
 import Pag from "../../components/Pagination/Pagination";
 import { deleteMyExperience } from "../../store/experiences/actions";
 
+
 export default function Experiences() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [expPerPage, setExpPerPage] = useState(5);
+  const [expPerPage] = useState(5);
 
   const dispatch = useDispatch();
 

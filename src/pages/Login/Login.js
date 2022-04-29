@@ -2,7 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField"
+import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -15,8 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selector";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../store/user/actions";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const theme = createTheme();
+toast.configure();
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -24,7 +27,7 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(selectToken);
-  console.log("token", token);
+  // console.log("token", token);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,10 +41,13 @@ export default function SignIn() {
       password: data.get("password"),
     });
   };
-
   useEffect(() => {
     if (token !== null) {
       navigate("/");
+      toast.success("Welcome Back", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 2000,
+      });
     }
   }, [token, navigate]);
 

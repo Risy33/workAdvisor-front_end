@@ -18,9 +18,11 @@ import { signUp } from "../../store/user/actions";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { selectToken } from "../../store/user/selector";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const theme = createTheme();
-
+toast.configure();
 export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,23 +34,28 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(signUp(name, email, password, isAdmin));
+    dispatch(signUp(name, email, password, isAdmin, navigate, toast));
     setEmail("");
     setPassword("");
     setName("");
     setIsAdmin(false);
     const data = new FormData(event.currentTarget);
+    console.log("data", data);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
+      isAdmin: data.get(isAdmin),
     });
   };
 
-  useEffect(() => {
-    if (token !== null) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (token !== null) {
+  //     toast.success("Welcome to Work Advisor", {
+  //       position: toast.POSITION.BOTTOM_LEFT,
+  //       autoClose: 2000,
+  //     });
+  //   }
+  // }, []);
 
   return (
     <ThemeProvider theme={theme}>

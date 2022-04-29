@@ -18,11 +18,12 @@ import moment from "moment";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+
 import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Header from "../../components/Header/Header";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { deleteMyExperience } from "../../store/experiences/actions";
 
 export default function Details() {
@@ -68,27 +69,22 @@ export default function Details() {
   return (
     <div>
       <Header />
-      <div>
-        <FormControl sx={{ m: 1, minWidth: 80 }}>
-          <InputLabel id="demo-simple-select-autowidth-label">
-            Filter
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-autowidth-label"
-            id="demo-simple-select-autowidth"
-            onChange={(e) => sort(e.target.value)}
-            autoWidth
-            value={""}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"date"}>Date</MenuItem>
-            <MenuItem value={"rating"}>Rating</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      {token ? <Form /> : null}
+
+      <FormControl sx={{ m: 1, minWidth: 100 }}>
+        <InputLabel id="demo-simple-select-autowidth-label">Filter</InputLabel>
+        <Select
+          labelId="demo-simple-select-autowidth-label"
+          id="demo-simple-select-autowidth"
+          onChange={(e) => sort(e.target.value)}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"date"}>Date</MenuItem>
+          <MenuItem value={"rating"}>Rating</MenuItem>
+        </Select>
+      </FormControl>
+
       {!workPlace ? (
         "loading"
       ) : (
@@ -155,6 +151,7 @@ export default function Details() {
             </CardContent>
           </Card>
           <div>
+            {token ? <Form /> : null}
             <div>
               {!sorted
                 ? "loading"

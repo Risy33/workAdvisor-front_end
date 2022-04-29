@@ -40,7 +40,16 @@ export default function Form() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add your Story</Button>
+      <div className="add-experience">
+        <Button
+          className="add-experience-button"
+          variant="contained"
+          color="success"
+          onClick={handleOpen}
+        >
+          Add your Experience
+        </Button>
+      </div>
       <div>
         <Modal
           open={open}
@@ -93,6 +102,7 @@ export default function Form() {
             </form>
           </Box>
         </Modal>
+        
       </div>
     </div>
   );

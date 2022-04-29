@@ -10,8 +10,10 @@ export default function Pag({ expPerPage, totalExp, paginate }) {
   return (
     <div>
       <ul className="paginationBttns">
-        {pageNumbers.map((number) => (
-          <li onClick={() => paginate(number)}>{number}</li>
+        {pageNumbers.map((number, i) => (
+          <li key={i} onClick={() => paginate(number)}>
+            {number}
+          </li>
         ))}
       </ul>
     </div>
