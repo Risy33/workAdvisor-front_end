@@ -11,7 +11,7 @@ import "./Form.css";
 export default function Form() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [imageSelected, setImageSelected] = useState("");
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -19,9 +19,10 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createExperience(title, description, image));
+    uploadImage();
+    dispatch(createExperience(title, description, imageSelected));
     handleClose();
-    setImage("");
+    setImageSelected("");
     setDescription("");
     setTitle("");
   };
@@ -36,6 +37,24 @@ export default function Form() {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+  };
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ibokrp5h");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/duoj5escy/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    console.log("file", file);
+    setImageSelected(file.url);
   };
 
   return (
@@ -87,14 +106,7 @@ export default function Form() {
               />
 
               <label>Image</label>
-              <input
-                type="text"
-                placeholder="image"
-                value={image}
-                onChange={(e) => {
-                  setImage(e.target.value);
-                }}
-              />
+              <input type="file" placeholder="url" onChange={uploadImage} />
 
               <button className="submit-button" type="submit">
                 Submit
@@ -102,7 +114,6 @@ export default function Form() {
             </form>
           </Box>
         </Modal>
-        
       </div>
     </div>
   );

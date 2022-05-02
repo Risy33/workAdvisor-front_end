@@ -75,6 +75,7 @@ export default function Details() {
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
+          value={""}
           onChange={(e) => sort(e.target.value)}
         >
           <MenuItem value="">
@@ -165,13 +166,6 @@ export default function Details() {
                             margin: 5,
                           }}
                         >
-                          <Typography
-                            gutterBottom
-                            variant="h6"
-                            color="text.primary"
-                          >
-                            {user.name}
-                          </Typography>
                           <Typography
                             gutterBottom
                             variant="h6"

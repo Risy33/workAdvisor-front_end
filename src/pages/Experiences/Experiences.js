@@ -9,15 +9,15 @@ import { fetchAllExperiences } from "../../store/experiences/actions";
 import { selectAllExperiences } from "../../store/experiences/selector";
 import "./Experiences.css";
 import Header from "../../components/Header/Header";
-import { CardHeader, Avatar, IconButton } from "@mui/material";
+import { CardHeader, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Link from "@mui/material/Link";
 import { updateUseful } from "../../store/experiences/actions";
 import { selectUser } from "../../store/user/selector";
 import moment from "moment";
 import Pag from "../../components/Pagination/Pagination";
-import { deleteMyExperience } from "../../store/experiences/actions";
 
+import { deleteMyExperience } from "../../store/experiences/actions";
 
 export default function Experiences() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,14 +53,6 @@ export default function Experiences() {
                 <div key={e.id} className="card">
                   <Card>
                     <CardHeader
-                      avatar={
-                        <Avatar
-                          sx={{ bgcolor: "red[500]" }}
-                          aria-label="recipe"
-                        >
-                          {user.name}
-                        </Avatar>
-                      }
                       action={
                         <IconButton aria-label="settings">
                           <MoreVertIcon />
@@ -103,11 +95,13 @@ export default function Experiences() {
                     </Button>
                     <br />
                     {user.id === e.userId && (
-                      <Button
-                        onClick={() => dispatch(deleteMyExperience(e.id))}
-                      >
-                        Delete Experience
-                      </Button>
+                      <>
+                        <Button
+                          onClick={() => dispatch(deleteMyExperience(e.id))}
+                        >
+                          Delete Experience
+                        </Button>
+                      </>
                     )}
                   </Card>
                 </div>

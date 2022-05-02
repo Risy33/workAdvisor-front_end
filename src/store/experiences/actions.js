@@ -11,6 +11,7 @@ export const FILTER_EXPERIENCES_BY_RATE = "experiences/filterByRate";
 export const SET_USEFUL = "experiences/setUseful";
 export const ADD_EXPERIENCE = "experiences/newExperience";
 export const DELETE_EXPERIENCE = "experiences/deleteStory";
+export const EDIT_EXPERIENCE = "experiences/editExperience";
 
 const startLoading = () => ({
   type: SET_LOADING,
@@ -116,6 +117,38 @@ export const deleteMyExperience = (id) => {
 
       console.log(`experience deleted?`, response.data);
       dispatch(deleteStory(id));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
+const editExperience = (title, description, image) => ({
+  type: EDIT_EXPERIENCE,
+  payload: { title, description, image },
+});
+
+export const editMyExperience = (id, title, image, description) => {
+  return async (dispatch, getState) => {
+    dispatch(startLoading());
+    const { token } = selectUser(getState());
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/experiences/${id}`,
+        {
+          title,
+          description,
+          image,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(`experience edited?`, response.data);
+      dispatch(editExperience(title, description, image));
     } catch (e) {
       console.log(e.message);
     }

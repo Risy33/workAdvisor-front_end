@@ -8,6 +8,7 @@ import {
 import {
   ADD_EXPERIENCE,
   DELETE_EXPERIENCE,
+  EDIT_EXPERIENCE,
   SET_USEFUL,
 } from "../experiences/actions";
 const initialState = {
@@ -90,6 +91,15 @@ export default function workPlacesReducer(state = initialState, action) {
       return {
         ...state,
         workPlace: { ...state.workPlace, experiences: deleteExperience },
+      };
+    }
+    case EDIT_EXPERIENCE: {
+      return {
+        ...state,
+        workPlace: {
+          ...state.workPlace,
+          experience: { ...action.payload },
+        },
       };
     }
     default: {

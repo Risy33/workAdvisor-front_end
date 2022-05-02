@@ -2,31 +2,57 @@
 
 ---
 
-## Introduction
-As I worked in the field of hospitality for a long time,I realized that in this citty is missing a platform where people that do the same jobs can help each other sharing their experiences of the places they worked for or their current job.
+[Check out the deployed version](https://workadvisor.netlify.app/)
 
-The purpose of this app is to create a community for people who want to work  in the hospitality industry.
+## Table of contents:
 
-## Used technologies
-
-### Backend
-
-Express
-NodeJS
-Postgress
-Sequelize
-REST
-
-### Frontend
-
-JavaScript
-React
-Redux
-Axios
-Material UI
+- **[Introduction](#Introduction)**
+- **[Technology used](#used-technologies)**
+- **[Goals for this project](#goals-for-this-project)**
+- **[User Stories and Wireframe](#user-stories-and-wireframe)**
 
 ---
 
-### What did I achieve?
+## Introduction
 
-In this project I wanted to put on practice the knowledge of what I have learned in this past 10 weeks and gain experience on how to build a full stack app.
+The purpose of this app is to create a community for people who want to work in the hospitality industry and post their work experience at specific restaurants,bars,hotels etc. to help others find their ideal job in the hospitality industry.
+
+---
+
+## **Technologies used**
+
+### Backend
+
+<img src='https://camo.githubusercontent.com/ba7b5a94c5934bd53128b7600332064a41d97c343ebc19e72c048daae18ea5d1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e6f64652e6a732d3333393933333f6c6f676f3d6e6f64652e6a73266c6f676f436f6c6f723d7768697465267374796c653d666f722d7468652d6261646765' /><img src='https://camo.githubusercontent.com/54d885a39ff8ae8e17e1f9dd9286eb8e754d4c44c6ff3a31b2ba8f143f454254/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f457870726573732d3030303030303f6c6f676f3d65787072657373266c6f676f436f6c6f723d7768697465267374796c653d666f722d7468652d6261646765' />
+<img src='https://camo.githubusercontent.com/ea0a0d5491e470f09b738a5b5412dc143ffdb1018f4ead88124374ffc576dbd4/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f506f737467726553514c2d3431363945313f6c6f676f3d706f737467726573716c266c6f676f436f6c6f723d7768697465267374796c653d666f722d7468652d6261646765' />
+<img src='https://camo.githubusercontent.com/1d7814efc567041c56f7cb83654566f6be83d8b2ff4392b6c1321bfeed7d7dc1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f53657175656c697a652d3532423045373f6c6f676f3d73657175656c697a65266c6f676f436f6c6f723d7768697465267374796c653d666f722d7468652d6261646765' />
+
+### Frontend
+
+<img src="https://img.shields.io/badge/JavaScript-yellow?logo=javascript&logoColor=white&style=for-the-badge"/><img src='https://camo.githubusercontent.com/876426d64480dd18283dc72bcf0f293d6871c746d5358168e28565efc1c0334d/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656163742d3631444146423f6c6f676f3d7265616374266c6f676f436f6c6f723d7768697465267374796c653d666f722d7468652d6261646765'>
+<img src='https://camo.githubusercontent.com/a3bbc59f190482c45788b1d213d1dc1b8f426691e0e6320aefe31bc6832f3491/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f52656475782d3736344142433f6c6f676f3d7265647578266c6f676f436f6c6f723d7768697465267374796c653d666f722d7468652d6261646765' />
+<img width='79px' src='https://camo.githubusercontent.com/2435c2a64789b8a71c701a1a593b4a6e6869789bfb0626e515dc2a6b6dffa6c5/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d435353332d3135373242363f7374796c653d666c61742d737175617265266c6f676f3d63737333'>
+
+#### UI Frameworks
+
+Material UI
+
+## <img width='70px' src='https://cdn-media-1.freecodecamp.org/images/1*FDNeKIUeUnf0XdqHmi7nsw.png' />
+
+---
+
+## Goals for this project
+
+The main goal of this project is to gain experience developing a full-stack app.I decided to use Redux in the front-end and the back-end was built in express and it is a REST API. The database is built using Postgres and Sequelize. You can find the back-end's repository [HERE](https://github.com/Risy33/workAadvisor-back-end)
+. I used a Material UI for the UI design which was also new to me. In short:
+
+- Practice full-stack development;
+- Learn new technologies
+- Implement a developer's approach by creating and following User stories and wireframes.
+
+---
+## User Stories and Wireframe
+
+- [Kanban with user stories](https://github.com/users/Risy33/projects/1)
+- [UML](https://dbdiagram.io/d/6259403a2514c9790337f877)
+- [Wire frame](https://wireframepro.mockflow.com/#/space/MeUrku6j9nb)
