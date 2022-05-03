@@ -19,7 +19,6 @@ export default function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    uploadImage();
     dispatch(createExperience(title, description, imageSelected));
     handleClose();
     setImageSelected("");
