@@ -95,13 +95,11 @@ export default function Experiences() {
                     </Button>
                     <br />
                     {user.id === e.userId && (
-                      <>
-                        <Button
-                          onClick={() => dispatch(deleteMyExperience(e.id))}
-                        >
-                          Delete Experience
-                        </Button>
-                      </>
+                      <Button
+                        onClick={() => dispatch(deleteMyExperience(e.id))}
+                      >
+                        Delete Experience
+                      </Button>
                     )}
                   </Card>
                 </div>
