@@ -3,7 +3,6 @@ import {
   SET_LOADING,
   SET_WORK_PLACES,
   SET_WORK_PLACE_ID,
-  SET_EXPERIENCES,
 } from "./actions";
 import {
   ADD_EXPERIENCE,
@@ -94,11 +93,15 @@ export default function workPlacesReducer(state = initialState, action) {
       };
     }
     case EDIT_EXPERIENCE: {
+      const updatedExperiences = state.workPlace.experiences.map((e) =>
+        e.id === action.payload.id ? { ...action.payload } : e
+      );
+
       return {
         ...state,
         workPlace: {
           ...state.workPlace,
-          experience: { ...action.payload },
+          experiences: updatedExperiences,
         },
       };
     }

@@ -18,13 +18,16 @@ import moment from "moment";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-
+import EditForm from "../../components/Form.js/EditForm";
 import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Header from "../../components/Header/Header";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { deleteMyExperience } from "../../store/experiences/actions";
+import {
+  deleteMyExperience,
+  editMyExperience,
+} from "../../store/experiences/actions";
 
 export default function Details() {
   const dispatch = useDispatch();
@@ -145,7 +148,7 @@ export default function Details() {
                     </Marker>
                   </MapContainer>
                   <Typography variant="body2" color="text.secondary">
-                    {workPlace.address}
+                    {workPlace?.address}
                   </Typography>
                 </div>
               </div>
@@ -198,11 +201,22 @@ export default function Details() {
                             </Button>
                           </CardActions>
                           {user.id === e.userId && (
-                            <Button
-                              onClick={() => dispatch(deleteMyExperience(e.id))}
-                            >
-                              Delete Experience
-                            </Button>
+                            <>
+                              <Button
+                                onClick={() =>
+                                  dispatch(deleteMyExperience(e.id))
+                                }
+                              >
+                                Delete Experience
+                              </Button>
+
+                              <EditForm
+                                id={e.id}
+                                title={e.title}
+                                description={e.description}
+                                image={e.image}
+                              />
+                            </>
                           )}
                         </Card>
                       </div>

@@ -123,18 +123,20 @@ export const deleteMyExperience = (id) => {
   };
 };
 
-const editExperience = (title, description, image) => ({
+const editExperience = (experience) => ({
   type: EDIT_EXPERIENCE,
-  payload: { title, description, image },
+  payload: experience,
 });
 
-export const editMyExperience = (id, title, image, description) => {
+export const editMyExperience = (id, title, description, image) => {
+  console.log("title", title);
   return async (dispatch, getState) => {
     dispatch(startLoading());
-    const { token } = selectUser(getState());
+    const user = selectUser(getState());
+    console.log("token", user.token);
     try {
       const response = await axios.patch(
-        `${apiUrl}/experiences/${id}`,
+        `${apiUrl}/experiences/edit/${id}`,
         {
           title,
           description,
@@ -142,13 +144,13 @@ export const editMyExperience = (id, title, image, description) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );
 
       console.log(`experience edited?`, response.data);
-      dispatch(editExperience(title, description, image));
+      dispatch(editExperience(response.data));
     } catch (e) {
       console.log(e.message);
     }
