@@ -24,10 +24,8 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Header from "../../components/Header/Header";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import {
-  deleteMyExperience,
-  editMyExperience,
-} from "../../store/experiences/actions";
+import { deleteMyExperience } from "../../store/experiences/actions";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Details() {
   const dispatch = useDispatch();
@@ -206,8 +204,9 @@ export default function Details() {
                             <>
                               <div className="delete-edit-buttons">
                                 <Button
-                                  variant="contained"
+                                  variant="outlined"
                                   color="success"
+                                  startIcon={<DeleteIcon />}
                                   onClick={() =>
                                     dispatch(deleteMyExperience(e.id))
                                   }

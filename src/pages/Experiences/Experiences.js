@@ -16,7 +16,7 @@ import { updateUseful } from "../../store/experiences/actions";
 import { selectUser } from "../../store/user/selector";
 import moment from "moment";
 import Pag from "../../components/Pagination/Pagination";
-import ReactPaginate from "react-paginate";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteMyExperience } from "../../store/experiences/actions";
 
 export default function Experiences() {
@@ -95,11 +95,16 @@ export default function Experiences() {
                     </Button>
                     <br />
                     {user.id === e.userId && (
-                      <Button
-                        onClick={() => dispatch(deleteMyExperience(e.id))}
-                      >
-                        Delete Experience
-                      </Button>
+                      <div className="delete-button">
+                        <Button
+                          variant="outlined"
+                          startIcon={<DeleteIcon />}
+                          color="success"
+                          onClick={() => dispatch(deleteMyExperience(e.id))}
+                        >
+                          Delete Experience
+                        </Button>
+                      </div>
                     )}
                   </Card>
                 </div>
