@@ -22,9 +22,9 @@ export default function EditForm(props) {
     e.preventDefault();
     dispatch(editMyExperience(props.id, title, description, image));
     handleClose();
-    setImage("");
-    setDescription("");
-    setTitle("");
+    setImage(image);
+    setDescription(description);
+    setTitle(title);
   };
   const style = {
     position: "absolute",
@@ -37,6 +37,23 @@ export default function EditForm(props) {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+  };
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ibokrp5h");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/duoj5escy/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    console.log("file", file);
+    setImage(file.url);
   };
 
   return (
@@ -70,7 +87,6 @@ export default function EditForm(props) {
                   setTitle(e.target.value);
                 }}
               />
-
               <label>Description</label>
               <textarea
                 type="text"
@@ -80,16 +96,8 @@ export default function EditForm(props) {
                   setDescription(e.target.value);
                 }}
               />
-
               <label>Image</label>
-              <input
-                type="text"
-                placeholder={image}
-                value={image}
-                onChange={(e) => {
-                  setImage(e.target.value);
-                }}
-              />
+              <input type="file" placeholder="url" onChange={uploadImage} />
 
               <button className="submit-button" type="submit">
                 Submit
