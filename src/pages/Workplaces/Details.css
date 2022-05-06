@@ -17,3 +17,11 @@
   justify-content: end;
   margin-bottom: 10px;
 }
+
+.delete-edit-buttons {
+  display: flex;
+}
+.edit-button {
+  justify-content: end;
+  margin-left: 475px;
+}

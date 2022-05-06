@@ -16,7 +16,7 @@ import { updateUseful } from "../../store/experiences/actions";
 import { selectUser } from "../../store/user/selector";
 import moment from "moment";
 import Pag from "../../components/Pagination/Pagination";
-
+import ReactPaginate from "react-paginate";
 import { deleteMyExperience } from "../../store/experiences/actions";
 
 export default function Experiences() {

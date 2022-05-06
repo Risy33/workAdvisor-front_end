@@ -191,7 +191,9 @@ export default function Details() {
                           </Typography>
                           <CardActions>
                             <Button
-                              sx={{ color: "black" }}
+                              sx={{
+                                color: "black",
+                              }}
                               onClick={() =>
                                 dispatch(updateUseful(e.id, e.useful))
                               }
@@ -202,20 +204,25 @@ export default function Details() {
                           </CardActions>
                           {user.id === e.userId && (
                             <>
-                              <Button
-                                onClick={() =>
-                                  dispatch(deleteMyExperience(e.id))
-                                }
-                              >
-                                Delete Experience
-                              </Button>
-
-                              <EditForm
-                                id={e.id}
-                                title={e.title}
-                                description={e.description}
-                                image={e.image}
-                              />
+                              <div className="delete-edit-buttons">
+                                <Button
+                                  variant="contained"
+                                  color="success"
+                                  onClick={() =>
+                                    dispatch(deleteMyExperience(e.id))
+                                  }
+                                >
+                                  Delete Experience
+                                </Button>
+                                <div className="edit-button">
+                                  <EditForm
+                                    id={e.id}
+                                    title={e.title}
+                                    description={e.description}
+                                    image={e.image}
+                                  />
+                                </div>
+                              </div>
                             </>
                           )}
                         </Card>

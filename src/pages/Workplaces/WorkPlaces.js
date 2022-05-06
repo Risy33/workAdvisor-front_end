@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectFilteredWorkPlaces,
   selectWorkPlaces,
@@ -18,7 +18,6 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 
 export default function WorkPlaces() {
-  const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const workPlacesFiltered = useSelector(selectFilteredWorkPlaces);
   const workPlaces = useSelector(selectWorkPlaces);

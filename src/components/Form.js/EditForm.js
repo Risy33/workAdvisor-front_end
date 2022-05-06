@@ -18,8 +18,6 @@ export default function EditForm(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  ;
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editMyExperience(props.id, title, description, image));
@@ -41,10 +39,11 @@ export default function EditForm(props) {
     p: 4,
   };
 
-  
   return (
     <div>
-      <Button onClick={handleOpen}>Edit experience</Button>
+      <Button variant="contained" color="success" onClick={handleOpen}>
+        Edit experience
+      </Button>
 
       <div>
         <Modal
