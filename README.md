@@ -52,11 +52,17 @@ The main goal of this project is to gain experience developing a full-stack app.
 
 ---
 
-## User Stories and Wireframe
+## User Stories Wireframe
 
 - [Kanban with user stories](https://github.com/users/Risy33/projects/1)
+
+## Wireframe
+
+- <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652268736/Screenshot_from_2022-05-11_13-25-33_rcekuj.png" alt="home page" width="400px" />
+- <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652268736/Screenshot_from_2022-05-11_13-25-06_zwlowb.png" alt="home page" width="400px" />
+-  <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652268736/Screenshot_from_2022-05-11_13-26-01_uzkqp2.png" alt="home page" width="400px" />
 - [UML](https://dbdiagram.io/d/6259403a2514c9790337f877)
-- [Wire frame](https://wireframepro.mockflow.com/#/space/MeUrku6j9nb)
+
 
 ---
 
