@@ -52,17 +52,18 @@ The main goal of this project is to gain experience developing a full-stack app.
 
 ---
 
-## User Stories Wireframe
+## User Stories
 
 - [Kanban with user stories](https://github.com/users/Risy33/projects/1)
 
 ## Wireframe
 
-- <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652268736/Screenshot_from_2022-05-11_13-25-33_rcekuj.png" alt="home page" width="400px" />
-- <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652269035/Screenshot_from_2022-05-11_13-36-58_jds2jk.png" alt="home page" width="400px" />
--  <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652268736/Screenshot_from_2022-05-11_13-26-01_uzkqp2.png" alt="home page" width="400px" />
-- [UML](https://dbdiagram.io/d/6259403a2514c9790337f877)
+- <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652268736/Screenshot_from_2022-05-11_13-25-33_rcekuj.png" alt="home page" width="400px" /> <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652269035/Screenshot_from_2022-05-11_13-36-58_jds2jk.png" alt="home page" width="400px" /> <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652268736/Screenshot_from_2022-05-11_13-26-01_uzkqp2.png" alt="home page" width="400px" />
 
+
+## Tables Diagram
+
+ <img src="https://res.cloudinary.com/duoj5escy/image/upload/v1652269190/Screenshot_from_2022-05-11_13-39-41_hzzfnn.png" alt="home page" width="400px" />
 
 ---
 
